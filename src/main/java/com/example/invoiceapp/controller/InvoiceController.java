@@ -18,16 +18,16 @@ public class InvoiceController {
 	private InvoiceService invoiceService;
 
 	@PostMapping("/create")
-	public ResponseEntity<String> createInvoice(@RequestBody InvoiceDTO invoiceDTO) {
-		invoiceService.createInvoice(invoiceDTO);
-		return new ResponseEntity<>("Invoice created successfully", HttpStatus.CREATED);
-	}
+    public ResponseEntity<String> createInvoice(@RequestBody InvoiceDTO invoiceDTO) {
+        invoiceService.createInvoice(invoiceDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Invoice created successfully");
+    }
 
-	@GetMapping("/all")
-	public ResponseEntity<List<Invoice>> getAllInvoices() {
-		List<Invoice> invoices = invoiceService.getAllInvoices();
-		return new ResponseEntity<>(invoices, HttpStatus.OK);
-	}
+	 @GetMapping("/all")
+	    public ResponseEntity<List<Invoice>> getAllInvoices() {
+	        List<Invoice> invoices = invoiceService.getAllInvoices();
+	        return ResponseEntity.ok().body(invoices);
+	    }
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Invoice> getInvoiceById(@PathVariable Long id) {
@@ -39,17 +39,17 @@ public class InvoiceController {
 		}
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<String> updateInvoice(@PathVariable Long id, @RequestBody InvoiceDTO invoiceDTO) {
-		invoiceService.updateInvoice(id, invoiceDTO);
-		return new ResponseEntity<>("Invoice updated successfully", HttpStatus.OK);
-	}
+	 @PutMapping("/{id}")
+	    public ResponseEntity<String> updateInvoice(@PathVariable Long id, @RequestBody InvoiceDTO invoiceDTO) {
+	        invoiceService.updateInvoice(id, invoiceDTO);
+	        return ResponseEntity.ok().body("Invoice updated successfully");
+	    }
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteInvoice(@PathVariable Long id) {
-		invoiceService.deleteInvoice(id);
-		return new ResponseEntity<>("Invoice deleted successfully", HttpStatus.OK);
-	}
+	 @DeleteMapping("/{id}")
+	    public ResponseEntity<String> deleteInvoice(@PathVariable Long id) {
+	        invoiceService.deleteInvoice(id);
+	        return ResponseEntity.ok().body("Invoice deleted successfully");
+	    }
 
 	// Other methods for invoice management
 }
